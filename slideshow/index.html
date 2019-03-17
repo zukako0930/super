@@ -39,6 +39,13 @@ img:hover{
     height: 40px;
     background: url(./images/next.png) no-repeat;
 }
+#page{
+    display: inline-block;
+    float: left;
+    margin-top: 8px;
+    height: 32px;
+    color: white;
+}
 </style>
 </head>
 <body>
@@ -56,7 +63,11 @@ img:hover{
         </div>
         <div class="toolbar">
             <div class="nav">
-                <div><img src="images/prev.png" id="prev"><img src="images/next.png" id="next"></div>
+                <div>
+                    <img src="images/prev.png" id="prev">
+                    <span id="page"></span>
+                    <img src="images/next.png" id="next">
+                </div>
             </div>
         </div>
     </div>
@@ -72,7 +83,10 @@ var changeImage = function(num){
         current+=num;
         document.getElementById('main_image').src = images[current];
     }
+    document.getElementById('page').textContent = (current+1)+"/"+(images.length);
 }
+document.getElementById('page').textContent = (current+1)+"/"+(images.length);
+
 document.getElementById('prev').onclick = function(){
     changeImage(-1);
 }
