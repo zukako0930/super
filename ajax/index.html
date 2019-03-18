@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="x-ua-compatible" content="IE=edge">
+<title>template</title>
+<link href="../../_common/css/style.css" rel="stylesheet" type="text/css">
+<style>
+.list{
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.list h2{
+    margin: 0 0 2em 0;
+    font-size: 16px;
+    text-align: center;
+}
+.seminar{
+    float: left;
+    margin: 10px 10px 10px 0;
+    border: 1px solid #23628f;
+    padding: 4px;
+    width: 25%;
+}
+.check{
+    margin: 0;
+    padding: 8px;
+    font-size: 12px;
+    color: #ffffff;
+    background-color: #23628f;
+    text-align: center;
+    cursor: pointer;
+}
+.red{
+    background-color: #e33a6d;
+}
+.green{
+    background-color: #7bc53e;
+}
+</style>
+</head>
+<body>
+<header>
+<div class="header-contents">
+<h1>crowd visualizer</h1>
+<h2>サブタイトル</h2>
+</div><!-- /.header-contents -->
+</header>
+<div class="main-wrapper">
+<section>
+	<ul class="list">
+        <li class="seminar" id="js">
+            <h2>JavaScript Class</h2>
+            <p class="check">check availability</p>
+        </li>
+        <li class="seminar" id="security">
+            <h2>Security Seminar</h2>
+            <p class="check">check availability</p>
+        </li>
+        <li class="seminar" id="uiux">
+            <h2>UI/UX hackason</h2>
+            <p class="check">check availability</p>
+        </li>
+    </ul>
+</section>
+</div><!-- /.main-wrapper -->
+<footer>JavaScript Samples</footer>
+</body>
+<script
+  src="https://code.jquery.com/jquery-1.12.4.min.js"
+  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  crossorigin="anonymous"></script>
+<script>
+//HTML読み込み時に実行する関数
+$(document).ready(function(){
+    //Ajaxでファイルの読み込み
+    $.ajax({url:'data.json',dataType:'json'})
+    .done(function(data){
+        $(data).each(function(){
+            //dataは複数あるのでイベントの発生したdataをthisで指定
+            if(this.crowded === 'yes'){
+                var idName = "#"+this.id;
+                //cssセレクタでidNameを指定
+                $(idName).find('.check').addClass('crowded');
+            }
+        });
+    })
+    //CORSエラーが出ます。
+    .fail(function(textStatus){
+        window.alert('読み込みエラー');
+        console.log(textStatus);
+    });
+
+    //クリック時に空き状況を表示
+    $('.check').on('click',function(){
+    //.checkは複数あるのでthisでイベント発生した要素を指定
+    //$()でjQueryオブジェクトに変換
+        if($(this).hasClass('crowded')){
+            $(this).text('残席わずか').addClass('red');
+        }else{
+            $(this).text('お席あります').addClass('green');
+        }
+    });
+});
+</script>
+</html>
