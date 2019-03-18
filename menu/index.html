@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="x-ua-compatible" content="IE=edge">
+<title>template</title>
+<link href="../../_common/css/style.css" rel="stylesheet" type="text/css">
+<style>
+.submenu h3{
+    margin: 0 0 1em 0;
+    font-size: 16px;
+    cursor: pointer;
+    color: aquamarine;
+}
+.submenu h3:hover{
+    color: brown;
+    text-decoration: underline;
+}
+.submenu ul{
+    margin: 0 0 1em 0;
+    list-style-type: none;
+    font-size: 14px;
+}
+.hidden{
+    display: none;
+}
+</style>
+</head>
+<body>
+<header>
+<div class="header-contents">
+<h1>タイトル</h1>
+<h2>サブタイトル</h2>
+</div><!-- /.header-contents -->
+</header>
+<div class="main-wrapper">
+<section>
+	<div class="sidebar">
+        <div class="submenu">
+            <h3>Getting Started</h3>
+            <ul class="hidden">
+                <li><a href="">- Summary</a></li>
+                <li><a href="">- Install</a></li>
+                <li><a href="">- First work</a></li>
+                <li><a href="">- Uninstall</a></li>
+            </ul>
+        </div>
+        <div class="submenu">
+            <h3>How to use</h3>
+            <ul class="hidden">
+                <li><a href="">- basic operation</a></li>
+                <li><a href="">- restore</a></li>
+                <li><a href="">- make plugins</a></li>
+            </ul>
+        </div>
+    </div>
+
+</section>
+</div><!-- /.main-wrapper -->
+<footer>JavaScript Samples</footer>
+</body>
+<script
+  src="https://code.jquery.com/jquery-1.12.4.min.js"
+  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  crossorigin="anonymous"></script>
+<script>
+$(document).ready(function(){
+    $('.submenu h3').on('click',function(){
+        $(this).next().toggleClass('hidden');
+    });
+});
+</script>
+</html>
